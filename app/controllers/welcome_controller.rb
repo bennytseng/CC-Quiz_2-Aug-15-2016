@@ -1,6 +1,10 @@
 class WelcomeController < ApplicationController
   def index
-    @supports = Support.order(completion: :ASC, created_at: :DESC).page(params[:page]).per(7)
+    @supports = Support.order(completion: :ASC, created_at: :DESC).page(params[:page_all]).per(7)
+
+    # @search_results = @supports
+    @search = Support.search(params[:search])
+    @search_results = @search.order(completion: :ASC, created_at: :DESC).page(params[:page_search]).per(7)
   end
 
   def create
@@ -13,14 +17,13 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def search
-    @search_results = @supports
-    @search = params[:search]
-    @search_results = Support.where (["name ILIKE ? OR email ILIKE ? OR department ILIKE ? OR message ILIKE?", "%#{@search}%", "%#{@search}%", "%#{@search}%", "%#{@search}%" ])
-    @search_results = @search_results.order(completion: :ASC, created_at: :DESC).page(params[:page]).per(7)
-    redirect_to index_path
-    p @search_results
-  end
+  # def search
+  #   @search_results = @supports
+  #   @search = params[:search]
+  #   @search_results = Support.where (["name ILIKE ? OR email ILIKE ? OR department ILIKE ? OR message ILIKE?", "%#{@search}%", "%#{@search}%", "%#{@search}%", "%#{@search}%" ])
+  #   @search_results = @search_results.order(completion: :ASC, created_at: :DESC).page(params[:page]).per(7)
+  #   redirect_to index_path
+  # end
 
   def edit
     @support = Support.find params[:id]
