@@ -1,0 +1,48 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+*{
+  box-sizing: border-box;
+}
+
+.completion {
+  font-weight: bolder;
+}
+.form {
+  width: 30%;
+  left: 0px;
+  position: absolute;
+  font-weight:bold;
+}
+
+.requests {
+  width: 70%;
+  right: 0px;
+  position: absolute;
+  float: right;
+}
+.edit_requests {
+  font-size: 20px;
+  width: 50%;
+  right: 0px;
+  position: absolute;
+  float: right;
+}
+
+
+#radio {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 12px;
+}
+
+table {
+  width: 100%;
+}
+
+td{
+  border: 1px solid black;
+  padding: 2px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2}

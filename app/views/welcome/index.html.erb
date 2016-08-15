@@ -1,0 +1,81 @@
+<div class='form'>
+    <h1>Supporter</h1>
+    <hr/>
+
+    <%= form_for :support do |p| %>
+    <%= p.label :name %>
+    <%= p.text_field :name %>
+    <br>
+    <%= p.label :email %>
+    <%= p.text_field :email %>
+    <br>
+    <%= p.label :department %>
+    <span id='radio'>
+        <%= p.radio_button :department, 'sales' %>
+        <%= p.label 'Sales' %>
+        <%= p.radio_button :department, 'marketing' %>
+        <%= p.label 'Marketing' %>
+        <%= p.radio_button :department, 'technical' %>
+        <%= p.label 'Technical' %>
+    </span>
+
+    <br>
+
+    <%= p.label :message %>
+    <%= p.text_area :message %>
+    <%= p.hidden_field :completion, :value => true %>
+    <br/>
+    <%= p.submit "Save" %>
+    <% end %>
+</div>
+
+<div class="requests">
+    <h2>Support Requests</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Department</td>
+            <td>Message</td>
+            <td>Actions</td>
+        </tr>
+        <% @supports.each do |p| %>
+        <tr>
+            <td><%= p.name%></td>
+            <td><%= p.email%></td>
+            <td><%= p.department%></td>
+            <td><%= p.message%></td>
+            <td>
+                <%= link_to "Edit", support_path(p) %>
+
+                <%= link_to "Delete", support_path(p), method: :delete, data: {confirm: "Are you sure you want to delete?"} %>
+
+                <%= link_to p.completion, support_path(p), method: :put %>
+
+                </span>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+
+    <h2>Search Support Requests</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Department</td>
+            <td>Message</td>
+            <td>Actions</td>
+        </tr>
+        <% @supports.each do |p| %>
+        <tr>
+            <td><%= p.name%></td>
+            <td><%= p.email%></td>
+            <td><%= p.department%></td>
+            <td><%= p.message%></td>
+            <td>
+                <%= button_to "Delete", @worker, method: :delete, data: {confirm: "Are you sure you  want to delete this worker?"}%>
+            </td>
+        </tr>
+        <% end %>
+    </div>

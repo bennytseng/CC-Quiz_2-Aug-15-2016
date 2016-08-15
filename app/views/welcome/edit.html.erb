@@ -1,0 +1,36 @@
+<div class='form'>
+    <h1>Supporter</h1>
+    <hr/>
+
+    <%= form_for @support do |p| %>
+    <%= p.label :name %>
+    <%= p.text_field :name %>
+    <br>
+    <%= p.label :email %>
+    <%= p.text_field :email %>
+    <br>
+    <%= p.label :department %>
+    <span id='radio'>
+        <%= p.radio_button :department, 'sales' %>
+        <%= p.label 'Sales' %>
+        <%= p.radio_button :department, 'marketing' %>
+        <%= p.label 'Marketing' %>
+        <%= p.radio_button :department, 'technical' %>
+        <%= p.label 'Technical' %>
+    </span>
+    <br>
+
+    <%= p.label :message %>
+    <%= p.text_area :message %>
+    <br/>
+    <%= p.submit "Save" %>
+<% end %>
+</div>
+
+<div class = 'edit_requests'>
+    ID:  <%= @support.id %><br />
+    Name:  <%= @support.name %><br />
+    Department:  <%= @support.department %><br />
+    Message:  <%= @support.message %><br />
+    Completed?  <%= @support.completion %><br />
+</div>
