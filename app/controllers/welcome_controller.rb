@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @supports = Support.order(completion: :ASC, created_at: :DESC)
+    @supports = Support.order(completion: :ASC, created_at: :DESC).page(params[:page]).per(7)
   end
 
   def create
