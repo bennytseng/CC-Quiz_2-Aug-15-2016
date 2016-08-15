@@ -20,10 +20,8 @@
     </span>
 
     <br>
-
     <%= p.label :message %>
     <%= p.text_area :message %>
-    <%= p.hidden_field :completion, :value => true %>
     <br/>
     <%= p.submit "Save" %>
     <% end %>
@@ -31,6 +29,7 @@
 
 <div class="requests">
     <h2>Support Requests</h2>
+    <%= paginate @supports %>
     <table>
         <tr>
             <td>Name</td>
@@ -52,31 +51,38 @@
 
                 <%= link_to p.completion, support_path(p), method: :put %>
 
-                </span>
-            </td>
-        </tr>
-        <% end %>
-    </table>
-    <%= paginate @supports %>
+            </span>
+        </td>
+    </tr>
+    <% end %>
+</table>
 
-    <h2>Search Support Requests</h2>
-    <table>
-        <tr>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Department</td>
-            <td>Message</td>
-            <td>Actions</td>
-        </tr>
-        <% @supports.each do |p| %>
-        <tr>
-            <td><%= p.name%></td>
-            <td><%= p.email%></td>
-            <td><%= p.department%></td>
-            <td><%= p.message%></td>
-            <td>
-                <%= button_to "Delete", @worker, method: :delete, data: {confirm: "Are you sure you  want to delete this worker?"}%>
-            </td>
-        </tr>
-        <% end %>
-    </div>
+
+<h2>Search Support Requests</h2>
+<%= paginate @supports %>
+<%= form_tag("/search", :method => "get") do %>
+    <%= label_tag(:search, "Search for Support Ticket:") %>
+    <%= text_field_tag(:search) %>
+    <%= submit_tag("Search Tickets") %>
+<% end %>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Department</td>
+        <td>Message</td>
+        <td>Actions</td>
+    </tr>
+    <% @supports.each do |p| %>
+    <tr>
+        <td><%= p.name%></td>
+        <td><%= p.email%></td>
+        <td><%= p.department%></td>
+        <td><%= p.message%></td>
+        <td>
+            <%= button_to "Delete", @worker, method: :delete, data: {confirm: "Are you sure you  want to delete this worker?"}%>
+        </td>
+    </tr>
+    <% end %>
+
+</div>
